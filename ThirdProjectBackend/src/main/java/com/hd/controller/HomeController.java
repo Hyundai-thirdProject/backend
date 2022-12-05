@@ -1,4 +1,4 @@
-package com.hd.kosa;
+package com.hd.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
