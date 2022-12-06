@@ -43,6 +43,8 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
+	<mybatis-spring:scan base-package="com.hd.mapper"/>
+	
 	<!-- mybatis 관련 Mapper패키지 매핑
 	<mybatis-spring:scan
 		base-package="com.hd.mapper" />
