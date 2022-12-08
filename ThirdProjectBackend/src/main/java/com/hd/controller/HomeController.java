@@ -8,11 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.connection.User;
 import com.hd.domain.MemberVO;
@@ -39,6 +35,11 @@ public class HomeController {
 	public String memberResponse(@RequestBody MemberVO member) {
 		System.out.println("id: " + member.getMid() + ", pw: " + member.getPassword());
 		return "success";
+	}
+
+	@GetMapping("")
+	public String home(){
+		return "home";
 	}
 	
 }
