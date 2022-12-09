@@ -18,8 +18,8 @@ public class FeedingRoomVO {
 	private int floor;
 	private int roomCount;
 	private String floorPlan;
-	private int latitude;
-	private int longitude;
+	private Double latitude;
+	private Double longitude;
 
 
 }
