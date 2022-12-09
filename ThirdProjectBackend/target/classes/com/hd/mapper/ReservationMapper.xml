@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hd.mapper.ReservationMapper">
+
+	<insert id="reservationinsert"
+		parameterType="com.hd.domain.ReservationVO">
+
+		insert into reservation values
+		(seq_rno.nextval, #{mid}, #{fno}, to_date(to_char(sysdate, 'YYYY/MM/DD') || '' ||  #{startTime},'YYYY/MM/DD HH24:MI:SS'), to_date(to_char(sysdate, 'YYYY/MM/DD') || '' ||  #{endTime},'YYYY/MM/DD HH24:MI:SS'), #{status})
+		
+	</insert>
+</mapper>
+
