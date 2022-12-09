@@ -5,6 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -18,8 +22,8 @@ public class ReservationVO {
 	private int rno;
 	private String mid;
 	private int fno;
-	private Date startTime;
-	private Date endTime;
+	private String startTime;
+	private String endTime;
 	private int status;
 	
 }
