@@ -7,4 +7,6 @@
 		insert into member(mid, password, phone)
 		values (#{mid}, #{password}, #{phone})
 	</insert>
+	
+	
 </mapper>
