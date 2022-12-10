@@ -39,5 +39,13 @@ public class ReservationMapperTest {
 		
 		mapper.reservationinsert(vo);
 	}
+	
+	@Test
+	public void testSearchMyReservation() {
+	
+		ReservationVO vo = mapper.searchMyReservation("ms");
+		System.out.println("fno: " + vo.getFno());
+		System.out.println("start time: " + vo.getStartTime());
+	}
 
 }

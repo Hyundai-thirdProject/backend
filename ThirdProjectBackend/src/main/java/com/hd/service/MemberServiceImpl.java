@@ -28,4 +28,10 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return successful;
 	}
+
+	@Override
+	public int login(MemberVO member) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
