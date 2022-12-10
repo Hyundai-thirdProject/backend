@@ -11,18 +11,13 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class FeedingRoomVO {
-	
-	private int fno;
-	private String departmentStore;
-	private int floor;
-	private int roomCount;
-	private String floorPlan;
-	private Double latitude;
-	private Double longitude;
-	
-	
-	
+public class FeedingReservationVO {
 
+	private String start_time;
+	private String department_store;
+	
+	private int floor;
+	private int room_count;
+	private int use_count;	
 
 }

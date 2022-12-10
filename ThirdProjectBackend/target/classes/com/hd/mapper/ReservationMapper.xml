@@ -10,5 +10,30 @@
 		(seq_rno.nextval, #{mid}, #{fno}, to_date(to_char(sysdate, 'YYYY/MM/DD') || '' ||  #{startTime},'YYYY/MM/DD HH24:MI:SS'), to_date(to_char(sysdate, 'YYYY/MM/DD') || '' ||  #{endTime},'YYYY/MM/DD HH24:MI:SS'), #{status})
 		
 	</insert>
+	
+	<select id="feedingreservation"
+		parameterType="com.hd.domain.FeedingReservationVO" resultType ="com.hd.domain.FeedingReservationVO">
+		select count(*) use_count, floor, room_count
+		from reservation r, feeding_room f
+		where r.fno = f.fno
+		and start_time = to_date(TO_CHAR(SYSDATE,'YYYY-MM-DD') || '' || #{start_time}, 'YYYY/MM/DD HH24:MI:SS')
+		and department_store = #{department_store}
+		and status = 0
+		group by floor, room_count
+		order by floor
+		
+	</select>
+	
+	<resultMap type="com.hd.domain.ReservationVO" id="reservation">
+		<result property="rno" column="rno"/>
+		<result property="mid" column="mid"/>
+		<result property="fno" column="fno"/>
+		<result property="startTime" column="start_time"/>
+		<result property="endTime" column="end_time"/>
+		<result property="status" column="status"/>
+	</resultMap>
+	<select id="searchMyReservation" resultMap="reservation">
+		select * from reservation where mid = #{userId} and status = 0
+	</select>
 </mapper>
 

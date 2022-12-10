@@ -1,7 +1,10 @@
 package com.hd.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.hd.domain.FeedingReservationVO;
 import com.hd.domain.ReservationVO;
 import com.hd.mapper.ReservationMapper;
 
@@ -29,5 +32,32 @@ public class ReservationServiceImpl implements ReservationService {
 		return successful;
 	}
 
+	@Override
+	public List<FeedingReservationVO> feedingreservationselect(FeedingReservationVO feedingreservationVO) {
+		List<FeedingReservationVO> lst = null;
+		
+		try {
+			log.info("ReservationServiceImpl.feedingreservationselect()");
+			lst = mapper.feedingreservation(feedingreservationVO);
+			
+		} catch (Exception e) {
+			log.info(e.toString());
+			throw e;
+		}
+		return lst;
+	}
+
+	@Override
+	public ReservationVO searchMyReservation(String userId) {
+		try {
+			log.info("ReservationServiceImpl.searchMyReservation()");
+			ReservationVO vo = mapper.searchMyReservation(userId);
+			return vo;
+			
+		} catch (Exception e) {
+			log.info(e.toString());
+			throw e;
+		}
+	}
 
 }
