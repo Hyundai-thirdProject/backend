@@ -4,7 +4,7 @@
 <mapper namespace="com.hd.mapper.FeedingRoomMapper">
 
 	<select id="selectPosition" parameterType="int" resultType="com.hd.domain.FeedingRoomVO">
-		select latitude, longitude
+		select *
 		from feeding_room
 		where fno = #{fno}
 	</select>
