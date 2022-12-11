@@ -3,6 +3,7 @@ package com.hd.mapper;
 import java.util.List;
 
 import com.hd.domain.FeedingReservationVO;
+import com.hd.domain.MyReservationVO;
 import com.hd.domain.ReservationVO;
 
 public interface ReservationMapper {
@@ -11,5 +12,5 @@ public interface ReservationMapper {
 
 	public List<FeedingReservationVO> feedingreservation(FeedingReservationVO feedingreservationVO);
 	
-	public ReservationVO searchMyReservation(String userId);
+	public MyReservationVO searchMyReservation(String userId);
 }
