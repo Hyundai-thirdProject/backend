@@ -86,4 +86,21 @@ public class ReservationServiceImpl implements ReservationService {
 		return successful;
 	}
 
+	@Override
+	public int cancelMyReservation(String userId) {
+		
+		int successful = 0;
+		try {
+			log.info("ReservationServiceImpl.calcelMyReservation()");
+			String uid = userId.replace("\"", "");
+			
+			mapper.cancelMyReservation(uid);
+			successful = 1;
+		} catch (Exception e) {
+			log.info(e.toString());
+			throw e;
+		}
+		return successful;
+	}
+
 }
