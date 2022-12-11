@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.hd.domain.FeedingReservationVO;
+import com.hd.domain.MyReservationVO;
+import com.hd.domain.MyReservationVO2;
 import com.hd.domain.ReservationVO;
 import com.hd.mapper.ReservationMapper;
 
@@ -48,16 +50,40 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public ReservationVO searchMyReservation(String userId) {
+	public MyReservationVO2 searchMyReservation(String userId) {
 		try {
 			log.info("ReservationServiceImpl.searchMyReservation()");
-			ReservationVO vo = mapper.searchMyReservation(userId);
-			return vo;
+			String uid = userId.replace("\"", "");
+			
+			MyReservationVO vo = mapper.searchMyReservation(uid);
+			MyReservationVO2 kotVo = new MyReservationVO2();
+			
+			kotVo.setMid(vo.getMid());
+			kotVo.setStart_time(vo.getStart_time().toString().split(" ")[3].substring(0, 5));
+			kotVo.setFloor(vo.getFloor());
+			kotVo.setDepartment_store(vo.getDepartment_store());
+
+			return kotVo;
 			
 		} catch (Exception e) {
 			log.info(e.toString());
 			throw e;
 		}
+	}
+
+	@Override
+	public int modifyMyReservation(ReservationVO vo) {
+		int successful = 0;
+		
+		try {
+			log.info("ReservationServiceImpl.modifyMyReservation()");
+			mapper.modifyMyReservation(vo);
+			successful = 1;
+		} catch (Exception e) {
+			log.info(e.toString());
+			throw e;
+		}
+		return successful;
 	}
 
 }
