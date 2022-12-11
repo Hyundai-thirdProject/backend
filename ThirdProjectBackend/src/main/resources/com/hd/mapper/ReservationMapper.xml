@@ -24,16 +24,18 @@
 		
 	</select>
 	
-	<resultMap type="com.hd.domain.ReservationVO" id="reservation">
+<!-- 	<resultMap type="com.hd.domain.ReservationVO" id="reservation">
 		<result property="rno" column="rno"/>
 		<result property="mid" column="mid"/>
 		<result property="fno" column="fno"/>
 		<result property="startTime" column="start_time"/>
 		<result property="endTime" column="end_time"/>
 		<result property="status" column="status"/>
-	</resultMap>
-	<select id="searchMyReservation" resultMap="reservation">
-		select * from reservation where mid = #{userId} and status = 0
+	</resultMap> -->
+	<select id="searchMyReservation" resultType="com.hd.domain.MyReservationVO">
+		select mid, start_time, department_store, floor
+		from reservation r, feeding_room f
+		where r.fno = f.fno and mid = #{userId} and status = '0'
 	</select>
 </mapper>
 
