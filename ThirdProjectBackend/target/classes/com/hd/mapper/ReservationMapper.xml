@@ -47,5 +47,13 @@
         where mid = #{mid} and status = 0
 	</update>
 	
+		
+	<update id="cancelMyReservation" parameterType="String">
+		update reservation set
+		status = 1
+		where MID = #{userId}
+		and status =0
+	</update>
+	
 </mapper>
 
