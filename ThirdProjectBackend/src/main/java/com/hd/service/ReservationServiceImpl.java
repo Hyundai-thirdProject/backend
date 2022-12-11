@@ -71,4 +71,19 @@ public class ReservationServiceImpl implements ReservationService {
 		}
 	}
 
+	@Override
+	public int modifyMyReservation(ReservationVO vo) {
+		int successful = 0;
+		
+		try {
+			log.info("ReservationServiceImpl.modifyMyReservation()");
+			mapper.modifyMyReservation(vo);
+			successful = 1;
+		} catch (Exception e) {
+			log.info(e.toString());
+			throw e;
+		}
+		return successful;
+	}
+
 }

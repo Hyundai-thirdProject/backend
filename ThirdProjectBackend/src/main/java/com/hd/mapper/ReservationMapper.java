@@ -13,4 +13,6 @@ public interface ReservationMapper {
 	public List<FeedingReservationVO> feedingreservation(FeedingReservationVO feedingreservationVO);
 	
 	public MyReservationVO searchMyReservation(String userId);
+	
+	public int modifyMyReservation(ReservationVO reservation);
 }

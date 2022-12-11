@@ -117,5 +117,14 @@ public class ReservationController {
 		
 		return gson.toJson(reservation.searchMyReservation(userId));
 	}
+	
+	@PostMapping("/modify")
+	public String modify(@RequestBody ReservationVO vo) {
+		Gson gson = new Gson();
+		
+		int successful = reservation.modifyMyReservation(vo);
+		
+		return successful == 1 ? gson.toJson("success") : gson.toJson("failure");
+	}
 
 }
