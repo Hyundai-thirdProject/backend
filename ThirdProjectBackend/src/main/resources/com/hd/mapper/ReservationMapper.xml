@@ -32,10 +32,20 @@
 		<result property="endTime" column="end_time"/>
 		<result property="status" column="status"/>
 	</resultMap> -->
+	
 	<select id="searchMyReservation" resultType="com.hd.domain.MyReservationVO">
 		select mid, start_time, department_store, floor
 		from reservation r, feeding_room f
 		where r.fno = f.fno and mid = #{userId} and status = '0'
 	</select>
+	
+	<update id="modifyMyReservation" parameterType="com.hd.domain.ReservationVO">
+		update reservation
+        set fno = #{fno},
+            start_time = to_date(to_char(sysdate, 'YYYY/MM/DD') || '' ||  #{startTime},'YYYY/MM/DD HH24:MI:SS'),
+            end_time = to_date(to_char(sysdate, 'YYYY/MM/DD') || '' ||  #{endTime},'YYYY/MM/DD HH24:MI:SS')
+        where mid = #{mid} and status = 0
+	</update>
+	
 </mapper>
 
