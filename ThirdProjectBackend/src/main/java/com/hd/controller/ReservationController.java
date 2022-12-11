@@ -127,4 +127,18 @@ public class ReservationController {
 		return successful == 1 ? gson.toJson("success") : gson.toJson("failure");
 	}
 
-}
+	@PostMapping("/cancel")
+	public String cancel(@RequestBody String userId) {
+		Gson gson = new Gson();
+		
+		System.out.println("userId는?? " + userId);
+		
+		
+		
+		int successful = reservation.cancelMyReservation(userId);
+		
+		return successful == 1 ? gson.toJson("success") : gson.toJson("failure");
+	}
+	}
+
+

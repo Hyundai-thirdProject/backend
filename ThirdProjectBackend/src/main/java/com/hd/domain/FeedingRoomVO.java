@@ -14,15 +14,14 @@ import lombok.ToString;
 public class FeedingRoomVO {
 	
 	private int fno;
-	private String departmentStore;
+	private String department_store;
 	private int floor;
-	private int roomCount;
+	private int room_count;
 	private String floorPlan;
+	private String image;
 	private Double latitude;
 	private Double longitude;
-	
-	
-	
+
 
 
 }
