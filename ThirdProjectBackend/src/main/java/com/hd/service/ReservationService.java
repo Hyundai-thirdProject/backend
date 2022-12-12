@@ -17,4 +17,6 @@ public interface ReservationService {
 	public int modifyMyReservation(ReservationVO vo);
 
 	public int cancelMyReservation(String userId);
+	
+	public int checkMyReservation(String userId); 
 }

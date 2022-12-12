@@ -17,4 +17,6 @@ public interface ReservationMapper {
 	public int modifyMyReservation(ReservationVO reservation);
 	
 	public int cancelMyReservation(String userId);
+	
+	public int checkMyReservation(String userId);
 }
