@@ -111,7 +111,7 @@ public class ReservationServiceImpl implements ReservationService {
 			log.info("ReservationServiceImpl.checkMyReservation()");
 			String uid = userId.replace("\"", "");
 			
-			mapper.checkMyReservation(uid);
+		
 			if(mapper.checkMyReservation(uid)==0) {
 				successful = 1;
 			}else {
