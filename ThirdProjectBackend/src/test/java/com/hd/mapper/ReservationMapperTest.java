@@ -1,22 +1,17 @@
 package com.hd.mapper;
 
-import org.junit.Test;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.hd.domain.MyReservationVO;
 import com.hd.domain.ReservationVO;
 
 import lombok.extern.java.Log;
-
-import java.util.Calendar;
-import java.util.Date;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
@@ -38,6 +33,17 @@ public class ReservationMapperTest {
 		vo.setEndTime("10:00");
 		
 		mapper.reservationinsert(vo);
+	}
+	
+	@Test
+	public void testSearchMyReservation() {
+	
+		MyReservationVO vo = mapper.searchMyReservation("jjy990409@naver.com");
+		System.out.println("fno: " + vo.getFloor());
+		System.out.println("start time: " + vo.getStart_time());
+		
+		Date time = vo.getStart_time();
+		System.out.println(time.toString().split(" ")[3].substring(0, 5));
 	}
 
 }

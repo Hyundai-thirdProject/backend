@@ -1,17 +1,18 @@
 package com.hd.controller;
 
-import java.sql.Timestamp;
-import java.util.Calendar;
-import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.google.gson.Gson;
+import com.hd.domain.FeedingReservationVO;
 import com.hd.domain.ReservationVO;
 import com.hd.service.ReservationService;
 
@@ -26,31 +27,32 @@ public class ReservationController {
 	
 	private ReservationService reservation;
 	
+	
 
 	@PostMapping("/insert")
 //	@JsonFormat
 	public ResponseEntity<String> register(@RequestBody ReservationVO reservationVO) {
 		log.info("ReservationVO: " + reservationVO);
 		
-//		// ¿À´Ã ³¯Â¥ ±¸ÇÏ±â
+//		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥ ï¿½ï¿½ï¿½Ï±ï¿½
 //		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 //		Calendar c1 = Calendar.getInstance();
 //		String strToday = sdf.format(c1.getTime());
-//		log.info(".....................strToday´Â?" + strToday);
+//		log.info(".....................strTodayï¿½ï¿½?" + strToday);
 //		
-//		// ¿À´Ã ³¯Â¥ + ÄÚÆ²¸°¿¡¼­ ¼±ÅÃÇÑ ½Ã°£ ´õÇÏ±â 
+//		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥ + ï¿½ï¿½Æ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½ 
 //		
 //		String timeStamp = reservationVO.getStartTime().toString();
 //		
-//		log.info(".....................timeStamp´Â?" + timeStamp);
+//		log.info(".....................timeStampï¿½ï¿½?" + timeStamp);
 //		
 //		String resultTime = strToday + " " + timeStamp;
 //		
-//		log.info(".....................resultTime´Â?" + resultTime);
+//		log.info(".....................resultTimeï¿½ï¿½?" + resultTime);
 //		
-//		// string¿¡¼­ timestamp·Î ¹Ù²Ù±â
+//		// stringï¿½ï¿½ï¿½ï¿½ timestampï¿½ï¿½ ï¿½Ù²Ù±ï¿½
 //		java.sql.Timestamp t = java.sql.Timestamp.valueOf(resultTime);
-//		log.info(".....................t´Â?" + t);
+//		log.info(".....................tï¿½ï¿½?" + t);
 //		
 //		reservationVO.setStartTime(t);
 //
@@ -67,5 +69,76 @@ public class ReservationController {
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
+//	@GetMapping("/select")
+//	public ResponseEntity<FeedingReservationVO> reservationSelect(@RequestParam String department_store,@RequestParam String start_time) throws JsonProcessingException{
+//
+//		log.info("FeedingReservationVO :"+ department_store + " , "+start_time); 
+//		FeedingReservationVO feedingreservationVO = new FeedingReservationVO();
+//		feedingreservationVO.setDepartment_store(department_store);
+//		feedingreservationVO.setStart_time(start_time);
+//		
+//		FeedingReservationVO feedingreservation;
+//		feedingreservation = reservation.feedingreservationselect(feedingreservationVO); 
+//		System.out.println("starttime" + feedingreservationVO.getStart_time() + ",depart_store " + feedingreservationVO.getDepartment_store());
+//
+//		
+//		return feedingreservation!=null ? new ResponseEntity<>(feedingreservation, HttpStatus.OK)
+//				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//	}
+	
+	@GetMapping("/select")
+	public String reservationSelect(@RequestParam String department_store, @RequestParam String start_time) {
+//		JSONObject jsonObject = new JSONObject();
+		Gson gson = new Gson();
+		
+		log.info("FeedingReservationVO : "+ department_store + " , "+start_time); 
+		FeedingReservationVO feedingreservationVO = new FeedingReservationVO();
+		feedingreservationVO.setDepartment_store(department_store);
+		feedingreservationVO.setStart_time(start_time);
+		
+		List<FeedingReservationVO> feedingreservation;
+		feedingreservation = reservation.feedingreservationselect(feedingreservationVO); 
+		
+//		for (FeedingReservationVO feeding : feedingreservation ) {
+//			jsonObject.put("start_time", feeding.getStart_time());
+//			jsonObject.put("department_store", feeding.getDepartment_store());
+//			jsonObject.put("floor", feeding.getFloor());
+//			jsonObject.put("room_count", feeding.getRoom_count());
+//			jsonObject.put("user_count", feeding.getUse_count());
+//		}
+//		
+		return gson.toJson(feedingreservation, List.class);
+	}
 
-}
+	@PostMapping("/search")
+	public String search(@RequestBody String userId) {
+		Gson gson = new Gson();
+		System.out.println("userIdëŠ”?? " + userId);
+		
+		return gson.toJson(reservation.searchMyReservation(userId));
+	}
+	
+	@PostMapping("/modify")
+	public String modify(@RequestBody ReservationVO vo) {
+		Gson gson = new Gson();
+		
+		int successful = reservation.modifyMyReservation(vo);
+		
+		return successful == 1 ? gson.toJson("success") : gson.toJson("failure");
+	}
+
+	@PostMapping("/cancel")
+	public String cancel(@RequestBody String userId) {
+		Gson gson = new Gson();
+		
+		System.out.println("userIdëŠ”?? " + userId);
+		
+		
+		
+		int successful = reservation.cancelMyReservation(userId);
+		
+		return successful == 1 ? gson.toJson("success") : gson.toJson("failure");
+	}
+	}
+
+

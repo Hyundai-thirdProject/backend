@@ -1,5 +1,7 @@
 package com.hd.domain;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,17 +13,11 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class FeedingRoomVO {
-	
-	private int fno;
+public class MyReservationVO {
+
+	private String mid;
+	private Date start_time;
 	private String department_store;
 	private int floor;
-	private int room_count;
-	private String floorPlan;
-	private String image;
-	private Double latitude;
-	private Double longitude;
-
-
-
+	
 }
