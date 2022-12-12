@@ -139,6 +139,19 @@ public class ReservationController {
 		
 		return successful == 1 ? gson.toJson("success") : gson.toJson("failure");
 	}
+	
+	@PostMapping("/check")
+	public String check(@RequestBody String userId) {
+		Gson gson = new Gson();
+		
+		System.out.println("userId는?? " + userId);
+		
+		
+		
+		int successful = reservation.checkMyReservation(userId);
+		
+		return successful == 1 ? gson.toJson("success") : gson.toJson("failure");
 	}
+}
 
 
