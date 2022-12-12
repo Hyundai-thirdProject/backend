@@ -20,7 +20,7 @@ public class FeedingRoomMapperTests {
 
     @Test
     public void selectPositionTest() {
-        int fno=1;
+        int fno=4;
         FeedingRoomVO vo = new FeedingRoomVO();
 
         log.info("gd");
