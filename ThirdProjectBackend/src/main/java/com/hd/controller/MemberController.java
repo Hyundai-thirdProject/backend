@@ -1,5 +1,14 @@
 package com.hd.controller;
+/**
+ * MemberController
+ * @author  *
+ * <pre>
+수정자                      수정내용
+-------------   --------------------------------------------------
 
+신미림, 장주연              최초 생성
+
+ **/
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
