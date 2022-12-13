@@ -55,5 +55,10 @@
 		and status =0
 	</update>
 	
+	<select id="checkMyReservation" parameterType="String" resultType="Int">
+		select count(*)
+		from reservation
+		where mid=#{userId} and status=0
+	</select>	
 </mapper>
 
