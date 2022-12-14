@@ -1,13 +1,21 @@
 package com.hd.controller;
 
 import com.google.gson.Gson;
-import com.hd.domain.FeedingRoomVO;
 import com.hd.service.FeedingRoomService;
 import lombok.extern.java.Log;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+/**
+ * FeedingRoomController
+ * @author ±è¹ÎÂù
+ *
+ * <pre>
+ *     ¼öÁ¤ÀÚ            ¼öÁ¤³»¿ë
+ * -------------   ------------------------
+ *   ±è¹ÎÂù              ÃÖÃÊ »ı¼º
+ * </pre>
+ */
 
 @RestController
 @RequestMapping("/feedingroom")
@@ -21,34 +29,8 @@ public class FeedingRoomController {
     @PostMapping("/position")
     public String getPosition(@RequestBody int fno) {
         Gson gson = new Gson();
-        System.out.println("gsonìœ¼ë¡œ ë°”ë¡œ ë„˜ê²¨ë³´ì! " + fno);
-        System.out.println("gsonìœ¼ë¡œ ë°”ë¡œ ë„˜ê²¨ë³´ì! " + gson.toJson(service.selectPosition(fno)));
+
         return gson.toJson(service.selectPosition(fno));
     }
 
-
-    @PostMapping("/position2")
-    public FeedingRoomVO getPosition2(@RequestBody int fno){
-        log.info("controllerë¡œ ê°’ì´ ì˜ ë„˜ì–´ì™”ëŠ”ì§€?"+fno);
-//        FeedingRoomVO vo = new FeedingRoomVO();
-//        service.selectPosition(fno);
-        return service.selectPosition(fno);
-    }
-
-    @PostMapping("/position3")
-    public String getPosition3(@RequestBody int fno) {
-        log.info("controllerë¡œ ê°’ì´ ì˜ ë„˜ì–´ì™”ëŠ”ì§€?"+fno);
-        JSONObject jsonObject = new JSONObject();
-        FeedingRoomVO vo = service.selectPosition(fno);
-        jsonObject.put("fno",fno);
-        jsonObject.put("department_store",vo.getDepartment_store());
-        jsonObject.put("floor",vo.getFloor());
-        jsonObject.put("room_count",vo.getRoom_count());
-        jsonObject.put("image",vo.getImage());
-        jsonObject.put("latitude", vo.getLatitude());
-        jsonObject.put("longitude",vo.getLongitude());
-        log.info(jsonObject+"");
-        log.info(vo+"");
-        return jsonObject.toJSONString();
-    }
 }
