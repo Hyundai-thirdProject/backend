@@ -30,6 +30,10 @@
 <br/>
 <br/>
 
+## 주요 기술스택
+- SpringBoot
+- Anroid
+- kakao API 
 
 
 ## 👪 팀원 소개
